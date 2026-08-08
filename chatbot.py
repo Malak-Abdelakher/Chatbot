@@ -52,7 +52,7 @@ body,
 
     background-attachment:fixed;
 
-    color:white;
+    color:Black;
 
 }
 
