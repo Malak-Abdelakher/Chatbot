@@ -22,8 +22,17 @@ def get_config(key: str) -> str | None:
 
 
 st.set_page_config(page_title="Malak's AI Assistant", page_icon="🤖", layout="centered")
+
+
 st.markdown("""
 <style>
+/* ---- Full-bleed dark background on the actual page, not just .stApp ---- */
+html, body, #root, [data-testid="stAppViewContainer"] {
+    background-color: #05060a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* ---- Perspective 3D grid background ---- */
 .stApp {
     background-color: #05060a;
@@ -68,6 +77,16 @@ h1 {
     padding: 12px 16px;
     margin-bottom: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Force bright, readable text everywhere inside chat messages */
+[data-testid="stChatMessage"] p,
+[data-testid="stChatMessage"] li,
+[data-testid="stChatMessage"] span,
+[data-testid="stChatMessageContent"],
+[data-testid="stMarkdownContainer"] {
+    color: #f5f5f7 !important;
+    opacity: 1 !important;
 }
 
 /* ---- Bottom fixed footer that holds the chat input ---- */
@@ -127,8 +146,6 @@ h1 {
 
 st.title("🤖 Malak's Personal AI Assistant")
 st.caption("Ask me anything about Malak's background, skills, or projects.")
-
-
 
 @st.cache_resource(show_spinner="Loading knowledge base...")
 def build_chain():
