@@ -1,0 +1,122 @@
+# Personal Profile
+
+Name: Malak Abdelakher
+Birthday: 29/11/2004
+Nationality: Egyptian
+Gender: Female
+
+# Education
+
+- Bachelor of Science in Computer Engineering
+- Major: Data Science and Software Systems
+- Universities:
+  - Ain Shams University
+  - University of East London
+- Graduation Date: June 2026
+- GPA: 2.91 / 4.00
+
+# Contact
+
+Email: malakabdelakher1@gmail.com
+GitHub: https://github.com/Malak-Abdelakher
+LinkedIn: https://linkedin.com/in/malak-abdelakher
+
+# Professional Summary
+
+I am a Computer Engineering graduate specializing in Artificial Intelligence, Machine Learning, NLP, Computer Vision, and Generative AI. I enjoy building intelligent systems using LLMs, VLMs, RAG, LangGraph, and modern AI technologies.
+
+# Technical Skills
+
+Programming Languages:
+- Python
+- C++
+- Java
+
+AI & Machine Learning:
+- Machine Learning
+- Deep Learning
+- Computer Vision
+- Natural Language Processing
+- TensorFlow
+- PyTorch
+- Keras
+- Scikit-learn
+
+Generative AI:
+- Large Language Models (LLMs)
+- Vision Language Models (VLMs)
+- Retrieval-Augmented Generation (RAG)
+- LangGraph
+- Ollama
+- Prompt Engineering
+
+Backend:
+- FastAPI
+- Flask
+- Node.js
+
+Databases:
+- PostgreSQL
+- pgvector
+- MongoDB
+- SQL
+
+Other Tools:
+- Docker
+- Git
+- GitHub
+- VS Code
+- Jupyter Notebook
+- LaTeX
+
+# Graduation Project
+
+Project Name:
+IntelliSurveill
+
+Description:
+An AI-powered real-time surveillance system for anomaly detection and face recognition using computer vision, LLMs, VLMs, Apache Kafka, PostgreSQL with pgvector, React, and LangGraph.
+
+# Other Projects
+
+- AI Codebase Understanding System
+- Heart Failure Prediction
+- Sports Image Classifier
+- Signotopia
+- Genetic Athletic Traits
+- USB Detector using Computer Vision
+- Mushroom Classification
+- E-Commerce Website
+
+# Current Work
+
+I am currently building AI chatbots and Retrieval-Augmented Generation (RAG) systems.
+
+I enjoy working with:
+- LangGraph
+- LangChain
+- Local LLMs
+- Vector Databases
+- AI Agents
+- FastAPI
+- PostgreSQL
+- ChromaDB
+
+# Career Interests
+
+I am interested in:
+- Artificial Intelligence
+- Machine Learning
+- Deep Learning
+- NLP
+- Computer Vision
+- Generative AI
+- AI Agents
+- Software Engineering
+
+# Personality
+
+- I enjoy learning new technologies.
+- I like solving challenging technical problems.
+- I enjoy building practical AI applications.
+- I continuously improve my programming and AI skills.
