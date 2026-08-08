@@ -52,7 +52,7 @@ body,
 
     background-attachment:fixed;
 
-    color:Black;
+    color: white;
 
 }
 
@@ -205,7 +205,7 @@ p{
 
 textarea{
 
-    color:white !important;
+    color:black !important;
 
 }
 
