@@ -23,7 +23,10 @@ def get_config(key: str) -> str | None:
 
 st.set_page_config(page_title="Malak's AI Assistant", page_icon="🤖", layout="centered")
 
-
+# ============================================================
+# DESIGN BLOCK — this is the ONLY new part. Edit colors/values
+# here to change the look. Everything below is untouched logic.
+# ============================================================
 st.markdown("""
 <style>
 /* ---- Full-bleed dark background on the actual page, not just .stApp ---- */
@@ -49,7 +52,7 @@ html, body, #root, [data-testid="stAppViewContainer"] {
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at center, transparent 0%, #05060a 75%);
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(5, 6, 10, 0.6) 100%);
     pointer-events: none;
     z-index: 0;
 }
@@ -101,6 +104,17 @@ h1 {
         linear-gradient(rgba(108, 92, 231, 0.35) 1px, transparent 1px),
         linear-gradient(90deg, rgba(108, 92, 231, 0.35) 1px, transparent 1px) !important;
     background-size: 40px 40px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+/* The footer's own wrapper — kill any leftover white/default background */
+footer, [data-testid="stFooter"], .stBottom {
+    background-color: #05060a !important;
+    width: 100% !important;
 }
 
 /* ---- Chat input box ---- */
@@ -146,6 +160,10 @@ h1 {
 
 st.title("🤖 Malak's Personal AI Assistant")
 st.caption("Ask me anything about Malak's background, skills, or projects.")
+# ============================================================
+# END DESIGN BLOCK
+# ============================================================
+
 
 @st.cache_resource(show_spinner="Loading knowledge base...")
 def build_chain():
