@@ -10,12 +10,18 @@ from langchain_core.prompts import ChatPromptTemplate
 
 load_dotenv()
 
-st.set_page_config(page_title="Malak's AI Assistant", page_icon="🤖", layout="centered")
 
-# ============================================================
-# DESIGN BLOCK — this is the ONLY new part. Edit colors/values
-# here to change the look. Everything below is untouched logic.
-# ============================================================
+def get_config(key: str) -> str | None:
+    """Read config from Streamlit Cloud secrets first, fall back to local .env."""
+    try:
+        if key in st.secrets:
+            return st.secrets[key]
+    except Exception:
+        pass  # st.secrets raises if no secrets.toml exists locally — that's fine
+    return os.getenv(key)
+
+
+st.set_page_config(page_title="Malak's AI Assistant", page_icon="🤖", layout="centered")
 st.markdown("""
 <style>
 /* ---- Perspective 3D grid background ---- */
@@ -64,16 +70,52 @@ h1 {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* ---- Bottom fixed footer that holds the chat input ---- */
+/* Streamlit renders this OUTSIDE .stApp's normal flow, so it needs
+   its own matching background + grid to blend in seamlessly. */
+[data-testid="stBottomBlockContainer"],
+[data-testid="stBottom"],
+.stChatFloatingInputContainer,
+[data-testid="stChatInput"] > div:first-child {
+    background-color: #05060a !important;
+    background-image:
+        linear-gradient(rgba(108, 92, 231, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 92, 231, 0.35) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+}
+
 /* ---- Chat input box ---- */
+[data-testid="stChatInput"] {
+    background: transparent !important;
+    border-top: none !important;
+    box-shadow: none !important;
+}
+
 [data-testid="stChatInput"] textarea {
-    background: rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
     border: 1px solid rgba(108, 92, 231, 0.4) !important;
     border-radius: 12px !important;
     color: #fff !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-[data-testid="stChatInput"] {
-    border-top: none !important;
+[data-testid="stChatInput"] textarea:focus {
+    border: 1px solid #6C5CE7 !important;
+    box-shadow: 0 0 12px rgba(108, 92, 231, 0.4) !important;
+}
+
+/* Kill the red validation/required outline some browsers apply */
+[data-testid="stChatInput"] textarea:invalid,
+[data-testid="stChatInput"] textarea:required {
+    border-color: rgba(108, 92, 231, 0.4) !important;
+    box-shadow: none !important;
+}
+
+/* Send button */
+[data-testid="stChatInput"] button {
+    background: rgba(108, 92, 231, 0.25) !important;
+    border-radius: 10px !important;
 }
 
 /* ---- Spinner text glow ---- */
@@ -85,17 +127,15 @@ h1 {
 
 st.title("🤖 Malak's Personal AI Assistant")
 st.caption("Ask me anything about Malak's background, skills, or projects.")
-# ============================================================
-# END DESIGN BLOCK
-# ============================================================
+
 
 
 @st.cache_resource(show_spinner="Loading knowledge base...")
 def build_chain():
     llm = ChatOpenAI(
-        api_key=os.getenv("OPENROUTER_API_KEY"),
-        base_url=os.getenv("OPENROUTER_BASE_URL"),
-        model=os.getenv("OPENROUTER_MODEL"),
+        api_key=get_config("OPENROUTER_API_KEY"),
+        base_url=get_config("OPENROUTER_BASE_URL"),
+        model=get_config("OPENROUTER_MODEL"),
         temperature=0.0,
     )
 
