@@ -23,138 +23,46 @@ def get_config(key: str) -> str | None:
 
 st.set_page_config(page_title="Malak's AI Assistant", page_icon="🤖", layout="centered")
 
-# ============================================================
-# DESIGN BLOCK — this is the ONLY new part. Edit colors/values
-# here to change the look. Everything below is untouched logic.
-# ============================================================
 st.markdown("""
 <style>
-/* ---- Full-bleed dark background on the actual page, not just .stApp ---- */
-html, body, #root, [data-testid="stAppViewContainer"] {
-    background-color: #05060a !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
 
-/* ---- Perspective 3D grid background ---- */
+/* Full page background */
 .stApp {
-    background-color: #05060a;
+    background-color: #050816;
     background-image:
-        linear-gradient(rgba(108, 92, 231, 0.35) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(108, 92, 231, 0.35) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
     background-size: 40px 40px;
-    background-position: center;
-    perspective: 500px;
-    overflow: hidden;
+    background-attachment: fixed;
 }
 
-.stApp::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(5, 6, 10, 0.6) 100%);
-    pointer-events: none;
-    z-index: 0;
+/* Main container transparent */
+.main .block-container{
+    background: transparent;
 }
 
-/* ---- Glow title ---- */
-h1 {
-    background: linear-gradient(90deg, #6C5CE7, #00d4ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 25px rgba(108, 92, 231, 0.5);
-    font-weight: 800 !important;
-}
-
-.stCaption, [data-testid="stCaptionContainer"] p {
-    color: #9aa0c3 !important;
-    font-size: 16px !important;
-}
-
-/* ---- Glassmorphism chat bubbles ---- */
-[data-testid="stChatMessage"] {
-    background: rgba(255, 255, 255, 0.05);
+/* Chat messages */
+[data-testid="stChatMessage"]{
+    background: rgba(255,255,255,0.04);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(108, 92, 231, 0.25);
-    border-radius: 16px;
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
-/* Force bright, readable text everywhere inside chat messages */
-[data-testid="stChatMessage"] p,
-[data-testid="stChatMessage"] li,
-[data-testid="stChatMessage"] span,
-[data-testid="stChatMessageContent"],
-[data-testid="stMarkdownContainer"] {
-    color: #f5f5f7 !important;
-    opacity: 1 !important;
+/* Chat input */
+[data-testid="stChatInput"]{
+    background: rgba(20,20,35,.85);
+    border-radius: 18px;
+    border: 1px solid rgba(100,150,255,.3);
 }
 
-/* ---- Bottom fixed footer that holds the chat input ---- */
-/* Streamlit renders this OUTSIDE .stApp's normal flow, so it needs
-   its own matching background + grid to blend in seamlessly. */
-[data-testid="stBottomBlockContainer"],
-[data-testid="stBottom"],
-.stChatFloatingInputContainer,
-[data-testid="stChatInput"] > div:first-child {
-    background-color: #05060a !important;
-    background-image:
-        linear-gradient(rgba(108, 92, 231, 0.35) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(108, 92, 231, 0.35) 1px, transparent 1px) !important;
-    background-size: 40px 40px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
+/* Sidebar */
+section[data-testid="stSidebar"]{
+    background:#0b1120;
 }
 
-/* The footer's own wrapper — kill any leftover white/default background */
-footer, [data-testid="stFooter"], .stBottom {
-    background-color: #05060a !important;
-    width: 100% !important;
-}
-
-/* ---- Chat input box ---- */
-[data-testid="stChatInput"] {
-    background: transparent !important;
-    border-top: none !important;
-    box-shadow: none !important;
-}
-
-[data-testid="stChatInput"] textarea {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(108, 92, 231, 0.4) !important;
-    border-radius: 12px !important;
-    color: #fff !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-[data-testid="stChatInput"] textarea:focus {
-    border: 1px solid #6C5CE7 !important;
-    box-shadow: 0 0 12px rgba(108, 92, 231, 0.4) !important;
-}
-
-/* Kill the red validation/required outline some browsers apply */
-[data-testid="stChatInput"] textarea:invalid,
-[data-testid="stChatInput"] textarea:required {
-    border-color: rgba(108, 92, 231, 0.4) !important;
-    box-shadow: none !important;
-}
-
-/* Send button */
-[data-testid="stChatInput"] button {
-    background: rgba(108, 92, 231, 0.25) !important;
-    border-radius: 10px !important;
-}
-
-/* ---- Spinner text glow ---- */
-.stSpinner > div {
-    border-top-color: #6C5CE7 !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
